@@ -37,5 +37,8 @@ function passwordError(){
 	document.getElementById("resultError").innerHTML = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Password Invalido ...</div>";
 }
 
-
-
+function serchEmpleado(){
+	document.getElementById("dataEmployes").innerHTML = "";
+	document.getElementById("dataEmployes").innerHTML = "<table class='table table-striped table-condensed' id='tablaEmployes'><tr class='success'><th>Nombre</th><th>Cargo</th><th>Vacante</th></tr></table>";
+	$("#tablaEmployes").append("<tr><td>Miguel Angel Menchu Xoyon</td><td>Auxiliar de Mantenimiento</td><td><button type='button' class='btn btn-link' onclick = 'generarVacante()' data-toggle='modal' href='#generarVacante'>Generar</button></td></tr>");
+}
