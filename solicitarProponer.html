@@ -30,30 +30,33 @@
 				<div class="col-xs-2 bg-info">
 						<ul class="nav nav-pills nav-stacked">
 							<br>
-					    	<li class="active"><a href="#noticias" aria-controls="noticias" role="tab" data-toggle="tab" onclick="newVacante()"> <span class="glyphicon glyphicon-pencil"></span> Nueva Vacante </a></li>
-					    	<li><a href="#tareas" aria-controls="tareas" role="tab" data-toggle="tab" onclick="showSolicitudesEnviadas();"><span class="glyphicon glyphicon-share-alt"></span> Vacantes Solicitadas</a></li>
-					    	<li><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" onclick="verCursos()"><span class="glyphicon glyphicon-ok"></span> Vacantes Autorizadas</a></li>
-					    	<li><a href="#parciales" aria-controls="parciales" role="tab" data-toggle="tab" onclick="notasParciales()"><span class="glyphicon glyphicon-remove"></span> Vacantes Rechazadas</a></li>
+					    	<li class="active"><a href="#" aria-controls="noticias" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-pencil"></span> Nueva Vacante </a></li>
 						</ul>
-						<br><br><br><br><br><br><br><br><br><br>
+						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 				</div>
-				<div class="col-xs-9">
-					<form class ="well">
+				<div class="col-xs-1">
+				</div>
+				<div class="col-xs-8">
+					<br>
+					<form class="well">
 						<fieldset class="form-group">
 							<div class="row">
 								<div class="col-xs-3">
 									<label for="exampleSelect1">Motivo: </label>
 								</div>
-								<div class="col-xs-9">
+								<div class="col-xs-6">
 									<select class="form-control" id="eexampleSelect11">
-									<option>Licencia de Estudios</option>
-									<option>Suspencion de IGSS</option>
-									<option>Maternidad</option>
-									<option>Fallecimiento</option>
-									<option>Traslado</option>
-									<option selected> Seleccione un Motivo</option>
-								</select>
+										<option>Licencia de Estudios</option>
+										<option>Suspencion de IGSS</option>
+										<option>Maternidad</option>
+										<option>Fallecimiento</option>
+										<option>Traslado</option>
+										<option selected> Seleccione un Motivo</option>
+									</select>
 								</div>
+								<div class="col-xs-3">
+									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Adjuntar Documento </button>
+								</div>	
 							</div>
 						</fieldset><br>
 						<fieldset class="form-group">
@@ -90,22 +93,34 @@
 								<div class="col-xs-3">
 									<label for="exampleSelect1">Propuesta: </label>
 								</div>
-								<div class="col-xs-5">
+								<div class="col-xs-6">
 									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nombre candidato">
 								</div>
-								<div class="col-xs-2">
-									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Subir </button>
+								<div class="col-xs-3">
+									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Subir Propuesta</button>
 								</div>
-								<div class="col-xs-2">
-									<small class="text-muted">Si no tiene propuesata dejar en blanco</small>
+							</div>
+						</fieldset>
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xs-3">
+									<label for="exampleSelect1">Propuesta: </label>
+								</div>
+								<div class="col-xs-9">
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" value="">
+											No tengo propuesta, delo a criterio de Administracion de RRHH.
+										</label>
+									</div>
 								</div>
 							</div>
 						</fieldset>
 						<fieldset class="form-group">
 							<br>
 							<div class="row">
-								<div class="col-xs-4"></div>
-								<div class="col-xs-8">
+								<div class="col-xs-6"></div>
+								<div class="col-xs-6">
 									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
 									<button type="button" class="btn btn-primary" onclick="SolicitarEnviar();">Solicitar vacante y enviar propuesta</button>	
 								</div>

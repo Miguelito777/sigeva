@@ -14,7 +14,7 @@
 					</div>
 					<div class="col-xs-9">
 						<ol class="breadcrumb">
-						  <li><a href="#">SIGEVA</a></li>
+						  <li><a href="index.html">SIGEVA</a></li>
 						  <li class="active">Jefe Dependencia</li>
 						</ol>
 					</div>
@@ -27,14 +27,17 @@
 		<section>
 			<div class="row">
 				<div class="col-xs-2 bg-info">
+					<div style="text-align:center;">
+						<h6>Bienvenidos(as)</h6>	
+					</div>
 						<ul class="nav nav-pills nav-stacked">
 							<br>
 					    	<li class="active"><a href="#noticias" aria-controls="noticias" role="tab" data-toggle="tab" onclick="newVacante()"> <span class="glyphicon glyphicon-pencil"></span> Nueva Vacante </a></li>
 					    	<li><a href="#tareas" aria-controls="tareas" role="tab" data-toggle="tab" onclick="showSolicitudesEnviadas();"><span class="glyphicon glyphicon-share-alt"></span> Vacantes Solicitadas</a></li>
-					    	<li><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" onclick="verCursos()"><span class="glyphicon glyphicon-ok"></span> Vacantes Autorizadas</a></li>
-					    	<li><a href="#parciales" aria-controls="parciales" role="tab" data-toggle="tab" onclick="notasParciales()"><span class="glyphicon glyphicon-remove"></span> Vacantes Rechazadas</a></li>
+					    	<li><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" onclick="showSolicitudesAutorizadas()"><span class="glyphicon glyphicon-ok"></span> Vacantes Autorizadas</a></li>
+					    	<li><a href="#parciales" aria-controls="parciales" role="tab" data-toggle="tab" onclick="showSolicitudesRechazadas()"><span class="glyphicon glyphicon-remove"></span> Vacantes Rechazadas</a></li>
 						</ul>
-						<br><br><br><br><br><br><br><br><br><br>
+						<br><br><br><br><br><br><br>
 				</div>
 				<div class="col-xs-10 well">
 					<div class="row">
@@ -60,25 +63,16 @@
 						            </div>
 						        </div>
 						        <div role="tabpanel" class="tab-pane" id="tareas">
-						            <div class="row">
-						                <div class="col-xs-2"></div>
-						                <div class="col-xs-8" id="SolicitudesEnviadas">
-						                	<p class="lead">Hello Word!!!</p>
-						                </div>
-						                <div class="col-xs-2"></div>
-						            </div>
+						            <div id="titleSE" style="text-align:center;"></div>
+						            <div id="SolicitudesEnviadas" style="text-align:center;"></div>
 						        </div>
 						        <div role="tabpanel" class="tab-pane" id="messages">
-						            <div class="row">
-						                <div class="col-xs-2"></div>
-						                <div class="col-xs-8" id="idcursos">
-						                	<p class="lead">hi</p>
-						                </div>
-						                <div class="col-xs-2"></div>
-						            </div>
+						            <div id="titleVA" style="text-align:center;"></div>
+						            <div id="SolicitudesAutorizadas" style="text-align:center;"></div>
 						        </div>
 						        <div role="tabpanel" class="tab-pane" id="parciales">
-						        	<p class="lead">Word</p>
+						        	<div id="titleSR" style="text-align:center;"></div>
+						        	<div id="SolicitudesRechazadas" style="text-align:center;"></div>
 						        </div>
 						    </div>
 						</div>
