@@ -6,177 +6,95 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
-	<div class="container">
 		<header>
-			<div class="row">
-				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
-					<br>
-					<a href="#"><span class="glyphicon glyphicon-align-left"></span></a>
-					<a href="index.html">__SIGEVA</a>><a href="JefeDependencia.html">Jefe de Dependencia</a>>Propuestas y Vacantes
-				</div>
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="text-align:center;" id="loading">
-					<img src="img/oj.jpg" width="75" height="75">
-				</div>
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
-				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-					<br>
-					<div class="form-group">
-						<div class="input-group">
-							<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
-							<input type="text" class="form-control" placeholder="Buscar" id="search">
-						</div>
+			<div class="bg-primary">
+				<div class="row">
+					<div class="col-xs-2" style="text-align:center;">
+						<img src="img/OJ-blanco.png" width="50" height="50">
 					</div>
-				</div>
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="text-align:center;">
-					<br>
-					<a href="#"><p class="lead"><span class="glyphicon glyphicon-inbox"></p></a>
-				</div>
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-					<br>
-					<img src='img/user.jpg' class="img-responsive">
+					<div class="col-xs-9">
+						<ol class="breadcrumb">
+						  <li><a href="#">SIGEVA</a></li>
+						  <li class="active">Jefe Dependencia</li>
+						</ol>
+					</div>
+					<div class="col-xs-1 bg-info" style="text-align:center;">
+						<a href="#"><p class="lead"><span class="glyphicon glyphicon-inbox"></p></a>
+					</div>
 				</div>
 			</div>
 		</header>
-		<hr>
 		<section>
 			<div class="row">
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
-				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
-				    <ul class="nav nav-tabs" role="tablist" id="myTab">
-				        <li role="presentation" class="active"><a href="#noticias" aria-controls="noticias" role="tab" data-toggle="tab" onclick="newVacante()"> <span class="glyphicon glyphicon-pencil"></span> Nueva Vacante </a></li>
-				        <li role="presentation"><a href="#tareas" aria-controls="tareas" role="tab" data-toggle="tab" onclick="showCourses()"><span class="glyphicon glyphicon-share-alt"></span> Vacantes Enviadas</a></li>
-				        <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" onclick="verCursos()"><span class="glyphicon glyphicon-ok"></span> Vacantes Autorizadas</a></li>
-				        <li role="presentation"><a href="#parciales" aria-controls="parciales" role="tab" data-toggle="tab" onclick="notasParciales()"><span class="glyphicon glyphicon-remove"></span> Vacantes Rechazadas</a>
-				    </ul>
-				    <div class="tab-content">
-				        <div role="tabpanel" class="tab-pane active" id="noticias">
-				            <br><br>
-				            <div class="row">
-				                <div class="col-xs-4">
-				                	<p class="lead">Código Empleado: </p>
-				                </div>
-				                <div class="col-xs-4">
-				                	<input class="form-control {2:form-control-{1:sm|lg}}" type="text" placeholder="Gafete" onkeyup="serchEmpleado();">
-				                </div>
-				                <div class="col-xs-4"></div>
-				            </div>
-				            <br>
-				            <div class="row">
-				                <div class="col-xs-1"></div>
-				                <div class="col-xs-10" id="dataEmployes"></div>
-				                <div class="col-xs-1"></div>
-				            </div>
-				        </div>
-				        <div role="tabpanel" class="tab-pane" id="tareas">
-				            <div class="row">
-				                <div class="col-xs-2"></div>
-				                <div class="col-xs-8" id="courses"></div>
-				                <div class="col-xs-2"></div>
-				            </div>
-				        </div>
-				        <div role="tabpanel" class="tab-pane" id="messages">
-				            <div class="row">
-				                <div class="col-xs-2"></div>
-				                <div class="col-xs-8" id="idcursos"></div>
-				                <div class="col-xs-2"></div>
-				            </div>
-				        </div>
-				        <div role="tabpanel" class="tab-pane" id="parciales"></div>
-				        <div role="tabpanel" class="tab-pane" id="examenesBimestrales"></div>
-				    </div>
+				<div class="col-xs-2 bg-info">
+						<ul class="nav nav-pills nav-stacked">
+							<br>
+					    	<li class="active"><a href="#noticias" aria-controls="noticias" role="tab" data-toggle="tab" onclick="newVacante()"> <span class="glyphicon glyphicon-pencil"></span> Nueva Vacante </a></li>
+					    	<li><a href="#tareas" aria-controls="tareas" role="tab" data-toggle="tab" onclick="showSolicitudesEnviadas();"><span class="glyphicon glyphicon-share-alt"></span> Vacantes Solicitadas</a></li>
+					    	<li><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab" onclick="verCursos()"><span class="glyphicon glyphicon-ok"></span> Vacantes Autorizadas</a></li>
+					    	<li><a href="#parciales" aria-controls="parciales" role="tab" data-toggle="tab" onclick="notasParciales()"><span class="glyphicon glyphicon-remove"></span> Vacantes Rechazadas</a></li>
+						</ul>
+						<br><br><br><br><br><br><br><br><br><br>
 				</div>
-				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-xs-10 well">
+					<div class="row">
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+						<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+						    <div class="tab-content">
+						        <div role="tabpanel" class="tab-pane active" id="noticias">
+						            <br><br>
+						            <div class="row">
+						                <div class="col-xs-4">
+						                	<p class="lead">Código Empleado: </p>
+						                </div>
+						                <div class="col-xs-4">
+						                	<input class="form-control {2:form-control-{1:sm|lg}}" type="text" placeholder="Gafete" onkeyup="serchEmpleado();">
+						                </div>
+						                <div class="col-xs-4"></div>
+						            </div>
+						            <br>
+						            <div class="row">
+						                <div class="col-xs-1"></div>
+						                <div class="col-xs-10" id="dataEmployes"></div>
+						                <div class="col-xs-1"></div>
+						            </div>
+						        </div>
+						        <div role="tabpanel" class="tab-pane" id="tareas">
+						            <div class="row">
+						                <div class="col-xs-2"></div>
+						                <div class="col-xs-8" id="SolicitudesEnviadas">
+						                	<p class="lead">Hello Word!!!</p>
+						                </div>
+						                <div class="col-xs-2"></div>
+						            </div>
+						        </div>
+						        <div role="tabpanel" class="tab-pane" id="messages">
+						            <div class="row">
+						                <div class="col-xs-2"></div>
+						                <div class="col-xs-8" id="idcursos">
+						                	<p class="lead">hi</p>
+						                </div>
+						                <div class="col-xs-2"></div>
+						            </div>
+						        </div>
+						        <div role="tabpanel" class="tab-pane" id="parciales">
+						        	<p class="lead">Word</p>
+						        </div>
+						    </div>
+						</div>
+						<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+					</div>
+				</div>
 			</div>
 		</section>
-		<br><br><br>
-		<hr>
-		<footer style="text-align:center;">
-			<h5>Organismo Judicial</h5>
-			<h5>CIT</h5>
-			<h5>Quetzaltenango, Guatemala</h5>
-		</footer>
-
-		<div class="modal fade" id="generarVacante">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-						<h4 class="modal-title">Generar Vacante</h4>
-					</div>
-					<div class="modal-body">
-						<form>
-							<fieldset class="form-group">
-								<label for="exampleInputEmail1">Email address</label>
-								<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email">
-								<small class="text-muted">We'll never share your email with anyone else.</small>
-							</fieldset>
-							<fieldset class="form-group">
-								<label for="exampleInputPassword1">Password</label>
-								<input type="password" class="form-control" id="exampleInputPassword1" placeholder="Enter email">
-							</fieldset>
-							<fieldset class="form-group">
-								<label for="exampleSelect1">Example select</label>
-								<select class="form-control" id="eexampleSelect11">
-									<option>1</option>
-									<option></o</option>
-									<option></o</option>
-									<option></o</option>
-									<option></o</option>
-								</select>
-							</fieldset>
-							<fieldset class="form-group">
-								<label for="exampleSelect1">Example multiple select</label>
-								<select multiple class="form-control" id="exampleSelect1">
-									<option></o</option>
-									<option></o</option>
-									<option></o</option>
-									<option></o</option>
-									<option></o</option>
-								</select>
-							</fieldset>
-							<fieldset class="form-group">
-								<label for="exampleTextarea">Example textarea</label>
-								<textarea class="form-control" id="exampleTextarea" rows="3"></textarea>
-							</fieldset>
-							<fieldset class="form-group">
-								<label for="exampleInputFile">File input</label>
-								<input type="file" class="form-control-file" id="exampleInputFile">
-								<small class="text-muted">This is some placeholder bEnter emaill>
-							</fieldset>
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>
-									Option one is this and that&mdash;be sure to include why it's great
-								</label>
-							</div>
-							<div class="radio">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">
-									Option two can be something else and selecting it will deselect option one
-								</label>
-							</div>
-							<div class="radio disabled">
-								<label>
-									<input type="radio" name="optionsRadios" id="optionsRadios3" value="option3" disabled>
-									Option three is disabled
-								</label>
-							</div>
-							<div class="checkbox">
-								<label>
-									<input type="checkbox"> Check me out
-								</label>
-							</div>
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</form>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-						<button type="button" class="btn btn-primary">Save changes</button>
-					</div>
+		<footer>
+			<div class="row">
+				<div class="col-xs-2"></div>
+				<div class="col-xs-10">
+					<h5>Organismo Judicial, CIT, Quetzaltenango, Guatemala </h5>
 				</div>
 			</div>
-		</div>
-	</div>
+		</footer>
 	<script type='text/javascript' src="js/jquery-2.1.1.js"></script>
 	<script type="text/javascript" src="js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="js/modelo.js"></script>

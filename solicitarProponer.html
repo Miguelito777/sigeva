@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SIGEVA</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/datepicker.css">
+</head>
+<body>
+	<div class="container">
+		<header>
+			<div class="row">
+				<div class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+					<br>
+					<a href="#"><span class="glyphicon glyphicon-align-left"></span></a>
+					<a href="index.html">__SIGEVA</a>><a href="JefeDependencia.html">Jefe de Dependencia</a>>Vacantes Y Propuestas
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="text-align:center;" id="loading">
+					<img src="img/oj.jpg" width="75" height="75">
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1"></div>
+				<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+					<br>
+					<div class="form-group">
+						<div class="input-group">
+							<div class="input-group-addon"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></div>
+							<input type="text" class="form-control" placeholder="Buscar" id="search">
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" style="text-align:center;">
+					<br>
+					<a href="#"><p class="lead"><span class="glyphicon glyphicon-inbox"></p></a>
+				</div>
+				<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+					<br>
+					<img src='img/user.jpg' class="img-responsive">
+				</div>
+			</div>
+		</header>
+		<hr>
+		<section>
+			<div class="row" style="text-align:center;">
+				<p class="lead">Solicitar Vacante y Enviar Propuesta</p>
+			</div>
+			<div class="row">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6 well">
+					<form>
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xs-3">
+									<label for="exampleSelect1">Motivo: </label>
+								</div>
+								<div class="col-xs-9">
+									<select class="form-control" id="eexampleSelect11">
+									<option>Licencia de Estudios</option>
+									<option>Suspencion de IGSS</option>
+									<option>Maternidad</option>
+									<option>Fallecimiento</option>
+									<option>Traslado</option>
+									<option selected> Seleccione un Motivo</option>
+								</select>
+								</div>
+							</div>
+						</fieldset><br>
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xs-3"><label for="exampleSelect1">Tiempo Solicitado: </label></div>
+								<div class="col-xs-3">
+									<select class="form-control" id="eexampleSelect11">
+										<option>1 mes</option>
+										<option>2 meses</option>
+										<option>3 meses</option>
+										<option>4 meses</option>
+										<option>5 meses</option>
+										<option selected>Tiempo Solicitado</option>
+									</select>														
+								</div>
+								<div class="col-xs-6">
+									<small class="text-muted">Tiempo en el que la vacante estara disponible</small>	
+								</div>
+							</div>
+						</fieldset><br>
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xs-3"><label for="exampleSelect1">Fecha Inicio:</label></div>
+								<div class="col-xs-5">
+									<input type="email" class="form-control" id="dateStart" placeholder="Fecha ">
+								</div>
+								<div class="col-xs-4">
+									<small class="text-muted">Verificar Tiempo Prudencial</small>	
+								</div>
+							</div>
+						</fieldset><br>
+						<fieldset class="form-group">
+							<div class="row">
+								<div class="col-xs-3">
+									<label for="exampleSelect1">Propuesta: </label>
+								</div>
+								<div class="col-xs-5">
+									<input type="email" class="form-control" id="exampleInputEmail1" placeholder="Nombre candidato">
+								</div>
+								<div class="col-xs-2">
+									<button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-upload"></span> Subir </button>
+								</div>
+								<div class="col-xs-2">
+									<small class="text-muted">Si no tiene propuesata dejar en blanco</small>
+								</div>
+							</div>
+						</fieldset>
+						<fieldset class="form-group">
+							<br>
+							<div class="row">
+								<div class="col-xs-4"></div>
+								<div class="col-xs-8">
+									<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+									<button type="button" class="btn btn-primary" onclick="SolicitarEnviar();">Solicitar vacante y enviar propuesta</button>	
+								</div>
+							</div>
+						</fieldset>	
+					</form>				
+				</div>
+				<div class="col-xs-3"></div>
+			</div>
+		</section>
+		<br><br><br>
+		<hr>
+		<footer style="text-align:center;">
+			<h5>(c) Organismo Judicial</h5>
+			<h5>CIT</h5>
+			<h5>Quetzaltenango, Guatemala</h5>
+		</footer>
+
+		<div class="modal fade" id="statusSolEnv">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Solicitud y Propuesta...</h4>
+					</div>
+					<div class="modal-body" id="bodyDiv" style="text-align:center;">
+					<input type="text" class="form-control" placeholder="FIRMA ELECTRONICA">	
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type='text/javascript' src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+	<script type="text/javascript" src="js/modelo.js"></script>
+	<script type="text/javascript" src="js/controlador.js"></script>
+	<script>calendario();</script>
+</body>
+</html>
