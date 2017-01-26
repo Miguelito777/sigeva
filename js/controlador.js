@@ -1,4 +1,9 @@
 var user;
+var admonPerson;
+var datos = [];
+var solicitudesUDDI = [];
+var foliosEnviados = [];
+var nombramientos = [];
 
 function loginInit(){
 	document.getElementById("titleIndex").innerHTML = "<p class='lead'>Inicio</p>";
@@ -8,12 +13,27 @@ function loginInit(){
 }
 function loginUser(){
 	var name = document.getElementById("user").value;
-	user = new User(name);
-	user.login();
+	if(name == "ChoxVictor"){
+		admonPerson = name;
+		userExit();
+	}else{
+		user = new User(name);
+		user.login();
+	}
 }
 function loginPassword(){
 	var password = document.getElementById("password").value;
-	user.loginPassword(password);
+	if (admonPerson == "ChoxVictor") {
+		if (password == "123456789") 
+			window.location = "AdministracionPersonal.html";
+		else{
+			document.getElementById("resultError").innerHTML = "";
+			document.getElementById("resultError").innerHTML = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Usuario Invalido ...</div>";
+		}
+
+	}else{
+		user.loginPassword(password);
+	}
 }
 
 function userExit(){
@@ -49,6 +69,8 @@ function calendario(){
 
     	x = fecha.split('/');
     	fecha = x[0]+"-"+x[1]+"-"+x[2];
+    	fecha = x[2]+"/"+x[1]+"/"+x[0];
+    	document.getElementById("dateStart").value = fecha;
 		if(parseInt(x[1]) < 4)
 			alert("No esta en la fecha disponible");
 	});	
@@ -109,3 +131,161 @@ function showSolicitudesRechazadas(){
 	},500);
 }
 
+
+
+
+/**
+* 		Controlador para el modulo de Administracion Personal
+*
+*/
+
+function solicitudesRecividas(){
+	document.getElementById("titleVS").innerHTML = "<h1>Vacantes Solicitadas</h1>";
+	document.getElementById("SolicitudesSolicitadas").innerHTML = "";
+	document.getElementById("SolicitudesSolicitadas").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "<table class='table table-striped' id='tablaEmployes'><tr class='info'><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Tipo</th><th>Tiempo</th><th>Propuesta</th><th>Documentos</th><th>Autorizar</th><th>Rechazar</th></tr></table>";
+		datos[0] = "<tr><td>Juzgado de Paz Totonicapan</td><td>Carlos Batz</td><td>Oficial III</td><td>Licencia Estudios</td><td>Interina</td><td>2 Meses</td><td>Pedro Tzul</td><td><a href='documents/docEjample.pdf'><span class='glyphicon glyphicon-file'></span> Documentos</a></td><td><a id='0' onclick='autorizarSolicitudes(this.id)'><span class='glyphicon glyphicon-ok'></span> Autorizar</a></td><td><a id='0' onclick=''><span class='glyphicon glyphicon-remove'></span> Rechazar</a></th></tr>";
+		datos[1] = "<tr><td>Juzgado de Primera Instancia</td><td>Juan Jose Batz</td><td>Secreatrio</td><td>Destitucion</td><td>Fija</td><td>Indefinido</td><td>Roy Tzul</td><td><a href='documents/docEjample.pdf'><span class='glyphicon glyphicon-file'></span> Documentos</a></td><td><a id='1' onclick='autorizarSolicitudes(this.id)'><span class='glyphicon glyphicon-ok'></span> Autorizar</a></td><td><a id='1' onclick='rechazarSolicitudes(this.id)'><span class='glyphicon glyphicon-remove'></span> Rechazar</a></th></tr>";
+		datos[2] = "<tr><td>Juzgado de Sentencia</td><td>Julio Tax</td><td>Comisario</td><td>Traslado</td><td>Fijo</td><td>Indefinido</td><td>Marcos Batz</td><td><a href='documents/docEjample.pdf'><span class='glyphicon glyphicon-file'></span> Documentos</a></td><td><a id='2' onclick='autorizarSolicitudes(this.id)'><span class='glyphicon glyphicon-ok'></span> Autorizar</a></td><td><a id='2' onclick='rechazarSolicitudes(this.id)'><span class='glyphicon glyphicon-remove'></span> Rechazar</a></th></tr>";
+		datos[3] = "<tr><td>Juzgado de Sentencia</td><td>Julio Tax</td><td>Comisario</td><td>Traslado</td><td>Fijo</td><td>Indefinido</td><td>Marcos Batz</td><td><a href='documents/docEjample.pdf'><span class='glyphicon glyphicon-file'></span> Documentos</a></td><td><a id='3' onclick='autorizarSolicitudes(this.id)'><span class='glyphicon glyphicon-ok'></span> Autorizar</a></td><td><a id='3' onclick='rechazarSolicitudes(this.id)'><span class='glyphicon glyphicon-remove'></span> Rechazar</a></th></tr>";
+		datos[4] = "<tr><td>Juzgado de Sentencia</td><td>Jairo Barreno</td><td>Comisario</td><td>Traslado</td><td>Fijo</td><td>Indefinido</td><td>Marcos Batz</td><td><a href='documents/docEjample.pdf'><span class='glyphicon glyphicon-file'></span> Documentos</a></td><td><a id='4' onclick='autorizarSolicitudes(this.id)'><span class='glyphicon glyphicon-ok'></span> Autorizar</a></td><td><a id='4' onclick='rechazarSolicitudes(this.id)'><span class='glyphicon glyphicon-remove'></span> Rechazar</a></th></tr>";
+		for(var i in datos){
+			$("#tablaEmployes").append(datos[i]);	
+		}
+	},500);
+}
+
+function autorizarSolicitudes(posicion){
+	var comentario = prompt("Agregea alguna observación a UDDI");
+	var elementoEnviar = datos.splice(posicion,1);
+	solicitudesUDDI.push(elementoEnviar);
+	setTimeout(function(){
+		alert("Solicitud a UDDI realizada correctamente...");
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "";
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "<img src='img/Loading_icon.gif'>";
+		setTimeout(function(){
+			document.getElementById("SolicitudesSolicitadas").innerHTML = "<table class='table table-striped' id='tablaEmployes'><tr class='info'><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Tipo</th><th>Tiempo</th><th>Propuesta</th><th>Documentos</th><th>Autorizar</th><th>Rechazar</th></tr></table>";
+			for(var i in datos){
+				$("#tablaEmployes").append(datos[i]);	
+			}
+		},500);
+	},500);	
+}
+
+function rechazarSolicitudes(posicion){
+	var comentario = prompt("Comente porque se rechazará la solicitud?");
+	var elementoEnviar = datos.splice(posicion,1);
+	setTimeout(function(){
+		alert("Solicitud rechazada correctamente...");
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "";
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "<img src='img/Loading_icon.gif'>";
+		setTimeout(function(){
+			document.getElementById("SolicitudesSolicitadas").innerHTML = "<table class='table table-striped' id='tablaEmployes'><tr class='info'><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Tipo</th><th>Tiempo</th><th>Propuesta</th><th>Documentos</th><th>Autorizar</th><th>Rechazar</th></tr></table>";
+			for(var i in datos){
+				$("#tablaEmployes").append(datos[i]);	
+			}
+		},500);
+	},250);	
+}
+
+
+function solicitudesUDDII(){
+	document.getElementById("titleSUDDI").innerHTML = "<h1>Solicitudes Enviadas a UDDI</h1>";
+	document.getElementById("SolicitudesUDDI").innerHTML = "";
+	document.getElementById("SolicitudesUDDI").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		datosSU = [];
+		document.getElementById("SolicitudesUDDI").innerHTML = "<table class='table table-striped' id='tablaEmployesUDDI'><tr class='info'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Tipo</th><th>Tiempo</th><th>Propuesta</th></tr></table>";
+		datosSU[0] = "<tr><td>12/01/2017</td><td>Juzgado de Primera Instancia</td><td>Juan Jose Batz</td><td>Secreatrio</td><td>Destitucion</td><td>Fija</td><td>Indefinido</td><td>Roy Tzul</td></tr>";
+		datosSU[1] = "<tr><td>12/01/2017</td><td>Juzgado de Sentencia</td><td>Julio Tax</td><td>Comisario</td><td>Traslado</td><td>Fijo</td><td>Indefinido</td><td>Marcos Batz</td></tr>";
+		datosSU[2] = "<tr><td>12/01/2017</td><td>Juzgado de Sentencia</td><td>Julio Tax</td><td>Comisario</td><td>Traslado</td><td>Fijo</td><td>Indefinido</td><td>Marcos Batz</td></tr>";
+		datosSU[3] = "<tr><td>12/01/2017</td><td>Juzgado de Sentencia</td><td>Jairo Barreno</td><td>Comisario</td><td>Traslado</td><td>Fijo</td><td>Indefinido</td><td>Marcos Batz</td></tr>";
+		for(var i in datosSU){
+			$("#tablaEmployesUDDI").append(datosSU[i]);	
+		}
+	},500);
+}
+
+
+function dictamenesRecividos(){
+	document.getElementById("titleDR").innerHTML = "<h1>Dictamenes y Candidatos recibidos de UDDI</h1>";
+	document.getElementById("dictamenesRecibidos").innerHTML = "";
+	document.getElementById("dictamenesRecibidos").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("dictamenesRecibidos").innerHTML = "<table class='table table-striped' id='tablaEmployesDic'><tr class='success'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Tiempo</th><th>Propuesta</th><th>Dictamen</th><th>Generar Folio y Enviar</th></tr></table>";
+		foliosEnviados[0] = "<tr><td>05/01/2017</td><td>Juzgado de Paz</td><td>Carlos Batz</td><td>Oficial III</td><td>Licencia Estudios</td><td>2 Meses</td><td>Pedro Tzul</td><td><a href='img/lidatoCandidatos.png'><span class='glyphicon glyphicon-list-alt'></span> Lista Candidatos</a></td><td><a id='0' onclick='firmarFolio(this.id)'><span class='glyphicon glyphicon-resize-small'></span> Generar, Firmar y Enviar</a></td></tr>";
+		foliosEnviados[1] = "<tr><td>06/01/2017</td><td>Juzgado de la niñez</td><td>Mario Ramirez</td><td>Oficial III</td><td>Destitucion</td><td>Indefinido</td><td>Pedro Tzul</td><td><a href='img/Dictamen.png'><span class='glyphicon glyphicon-list-alt'></span> Dictamen</a></td><td><a id='1' onclick='firmarFolio(this.id)'><span class='glyphicon glyphicon-resize-small'></span>Generar, Firmar y Enviar</a></td></tr>";
+		foliosEnviados[2] = "<tr><td>08/01/2017</td><td>Juzgado de sentencia</td><td>Pedro Bazt</td><td>Comisario</td><td>Suspencion</td><td>2 Meses</td><td>Pedro Tzul</td><td><a href='img/lidatoCandidatos.png'><span class='glyphicon glyphicon-list-alt'></span> Lista Candidatos</a></td><td><a id='2' onclick='firmarFolio(this.id)'><span class='glyphicon glyphicon-resize-small'></span> Generar, Firmar y Enviar</a></td></tr>";
+		foliosEnviados[3] = "<tr><td>10/01/2017</td><td>Juzgado de ejecucion</td><td>Jairo Tale</td><td>Secreatario</td><td>Licencia Estudios</td><td>2 Meses</td><td>Pedro Tzul</td><td><a href='img/lidatoCandidatos.png'><span class='glyphicon glyphicon-list-alt'></span> Lista Candidatos</a></td><td><a id='3' onclick='firmarFolio(this.id)'><span class='glyphicon glyphicon-resize-small'></span> Generar, Firmar y Enviar</a></td></tr>";
+		foliosEnviados[4] = "<tr><td>20/01/2017</td><td>Juzgado de familia</td><td>Marcos Choxom</td><td>Oficial I</td><td>Licencia Estudios</td><td>2 Meses</td><td>Pedro Tzul</td><td><a href='img/lidatoCandidatos.png'><span class='glyphicon glyphicon-list-alt'></span> Lista Candidatos</a></td><td><a id='4' onclick='firmarFolio(this.id)'><span class='glyphicon glyphicon-resize-small'></span> Generar, Firmar y Enviar</a></td></tr>";
+		for(var i in foliosEnviados){
+			$("#tablaEmployesDic").append(foliosEnviados[i]);	
+		}
+	},500);
+}
+
+function firmarFolio(posicion){
+	var comentario = prompt("Pin para firma electronica?");
+	var elementoEnviar = foliosEnviados.splice(posicion,1);
+	setTimeout(function(){
+		alert("Folio enviado correctamente a Entidad Nominadora...");
+		document.getElementById("dictamenesRecibidos").innerHTML = "";
+		document.getElementById("dictamenesRecibidos").innerHTML = "<img src='img/Loading_icon.gif'>";
+		setTimeout(function(){
+			document.getElementById("dictamenesRecibidos").innerHTML = "<table class='table table-striped' id='tablaEmployesDic'><tr class='success'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Tiempo</th><th>Propuesta</th><th>Dictamen</th><th>Generar Folio y Enviar</th></tr></table>";
+			for(var i in foliosEnviados){
+				$("#tablaEmployesDic").append(foliosEnviados[i]);	
+			}
+		},500);
+	},500);	
+}
+
+function foliosEnviadoss(){
+	document.getElementById("titleFE").innerHTML = "<h1>Solicitudes Envidas a Autoridades Nominadoras</h1>";
+	document.getElementById("foliosEnviadosData").innerHTML = "";
+	document.getElementById("foliosEnviadosData").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("foliosEnviadosData").innerHTML = "<table class='table table-striped' id='dataFoliosEnviados'><tr class='info'><th>Fecha Envio</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Folio</th></tr></table>";
+		$("#dataFoliosEnviados").append("<tr><td>12/08/2016</td><td>Miguel Angel Menchu Xoyon</td><td>Juzgado de Familia</td><td>Oficial III</td><td>Licencia</td><td><a href='img/Folio.png' ><span class = 'glyphicon glyphicon-paperclip'></span> ver Folio</a></td></tr>");
+		$("#dataFoliosEnviados").append("<tr><td>12/08/2016</td><td>Juan Vasquez</td><td>Juzgado de Instancia</td><td>Secretario</td><td>Suspencion</td><td><a href='img/Folio.png' ><span class = 'glyphicon glyphicon-paperclip'></span> ver Folio</a></td></tr>");
+		$("#dataFoliosEnviados").append("<tr><td>12/08/2016</td><td>Maria del Carmen</td><td>Juzgado de Paz</td><td>Comisario</td><td>Destitucion</td><td><a href='img/Folio.png' ><span class = 'glyphicon glyphicon-paperclip'></span> ver Folio</a></td></tr>");
+		$("#dataFoliosEnviados").append("<tr><td>12/08/2016</td><td>Luis Carlos Perez</td><td>Juzgado de Ejecucion</td><td>Ofial I</td><td>Traslado</td><td><a href='img/Folio.png' ><span class = 'glyphicon glyphicon-paperclip'></span> ver Folio</a></td></tr>");
+		$("#dataFoliosEnviados").append("<tr><td>12/08/2016</td><td>Marco Barrientos</td><td>Juzgado Familia</td><td>Notificador</td><td>Licencia</td><td><a href='img/Folio.png' ><span class = 'glyphicon glyphicon-paperclip'></span> ver Folio</a></td></tr>");
+		$("#dataFoliosEnviados").append("<tr><td>12/08/2016</td><td>Julio Melgar</td><td>Juzgado de la Niniez</td><td>Comisario</td><td>Licencia</td><td><a href='img/Folio.png' ><span class = 'glyphicon glyphicon-paperclip'></span> ver Folio</a></td></tr>");
+	},500);
+}
+function AcuerdosNombramientos(){
+	document.getElementById("titleANR").innerHTML = "<h1>Acuerdos de Nombramientos Recibidos</h1>";
+	document.getElementById("acuerdosNombramientos").innerHTML = "";
+	document.getElementById("acuerdosNombramientos").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("acuerdosNombramientos").innerHTML = "<table class='table table-striped' id='acuerdosNombramientosData'><tr class='success'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Accion</th></tr></table>";
+		
+		nombramientos[0] = "<tr><td>12/08/2016</td><td>Miguel Angel Menchu Xoyon</td><td>Juzgado de Familia</td><td>Oficial III</td><td>Licencia</td><td><a id='0' onclick='transcribirNotificar(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		nombramientos[1] = "<tr><td>12/08/2016</td><td>Juan Vasquez</td><td>Juzgado de Instancia</td><td>Secretario</td><td>Suspencion</td><td><a id='1' onclick='transcribirNotificar(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		nombramientos[2] = "<tr><td>12/08/2016</td><td>Maria del Carmen</td><td>Juzgado de Paz</td><td>Comisario</td><td>Destitucion</td><td><a id='2' onclick='transcribirNotificar(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		nombramientos[3] = "<tr><td>12/08/2016</td><td>Luis Carlos Perez</td><td>Juzgado de Ejecucion</td><td>Ofial I</td><td>Traslado</td><td><a id='3' onclick='transcribirNotificar(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		nombramientos[4] = "<tr><td>12/08/2016</td><td>Marco Barrientos</td><td>Juzgado Familia</td><td>Notificador</td><td>Licencia</td><td><a id='4' onclick='transcribirNotificar(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		nombramientos[5] = "<tr><td>12/08/2016</td><td>Julio Melgar</td><td>Juzgado de la Niniez</td><td>Comisario</td><td>Licencia</td><td><a id='5' onclick='transcribirNotificar(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		for(var i in nombramientos){
+			$("#acuerdosNombramientosData").append(nombramientos[i]);	
+		}
+	},500);
+}
+
+function transcribirNotificar(posicion){
+	prompt("Password para firma electrónica...");
+	nombramientos.splice(posicion,1);
+	setTimeout(function(){
+		alert("Se ha notificado a la Persona Nombrada!!!");
+		document.getElementById("acuerdosNombramientos").innerHTML = "";
+		document.getElementById("acuerdosNombramientos").innerHTML = "<img src='img/Loading_icon.gif'>";
+		setTimeout(function(){
+			document.getElementById("acuerdosNombramientos").innerHTML = "<table class='table table-striped' id='acuerdosNombramientosData'><tr class='success'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Accion</th></tr></table>";
+			for(var i in nombramientos){
+				$("#acuerdosNombramientosData").append(nombramientos[i]);	
+			}
+		},500);
+	},500);
+}
