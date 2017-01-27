@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>SIGEVA</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+		<header>
+			<div class="bg-primary">
+				<div class="row">
+					<div class="col-xs-2" style="text-align:center;">
+						<img src="img/OJ-blanco.png" width="50" height="50">
+					</div>
+					<div class="col-xs-9">
+						<ol class="breadcrumb">
+						  <li><a href="index.html">SIGEVA</a></li>
+						  <li class="active">Dotación y Desarrollo Integral</li>
+						</ol>
+					</div>
+					<div class="col-xs-1 bg-info" style="text-align:center;">
+						<a href="#"><p class="lead"><span class="glyphicon glyphicon-inbox"></p></a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section>
+			<div class="row">
+				<div class="col-xs-2 bg-info">
+					<div style="text-align:center;">
+						<h6>Bienvenidos(as)</h6>	
+					</div>
+						<ul class="nav nav-pills nav-stacked">
+							<br>
+					    	<li class="active"><a href="#noticias" aria-controls="noticias" role="tab" data-toggle="tab" onclick="solicitudesRecividasDictamenesListado()"> <span class="glyphicon glyphicon-pencil"></span> Solicitudes Dictamenes y Listado de Candidatos</a></li>
+					    	<li><a href="#DicListEnv" aria-controls="DicListEnv" role="tab" data-toggle="tab" onclick="solicitudesEnviadasDictamenesListado()"> <span class="glyphicon glyphicon-share-alt"></span> Dictamenes y Listados Enviados</a></li>
+						</ul>
+						<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+				</div>
+				<div class="col-xs-10 well">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						    <div class="tab-content">
+						        <div role="tabpanel" class="tab-pane active" id="noticias">
+						            <div id="titleSDL" style="text-align:center;"></div>
+						            <div id="SolicitudesSolicitadas" style="text-align:center;"></div>
+						        </div>
+						        <div role="tabpanel" class="tab-pane active" id="DicListEnv">
+						            <div id="titleDLR" style="text-align:center;"></div>
+						            <div id="dictamenesEnviados" style="text-align:center;"></div>
+						        </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div class="row">
+				<div class="col-xs-2"></div>
+				<div class="col-xs-10">
+					<h5>Organismo Judicial, CIT, Quetzaltenango, Guatemala </h5>
+				</div>
+			</div>
+		</footer>
+
+		<div class="modal fade" id="modal-id">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Candidatos Elegibles</h4>
+					</div>
+					<div class="modal-body">
+						<div id="titleCandidatos" style="text-align:center;"></div>
+						<div id="tableCandidatos" style="text-align:center;"></div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" onclick='gererarDictamen();'>Generar Dictamen o Listado de Candidatos</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+		<div class="modal fade" id="resultDictamen">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Dictamen Y Lista de Candidatos</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Exito!</strong> Dictamen y Listado de Candidatos Generado Correctamente ...
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cerrar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script type='text/javascript' src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/modelo.js"></script>
+	<script type="text/javascript" src="js/controlador.js"></script>
+	<script> solicitudesRecividasDictamenesListado(); </script>
+</body>
+</html>

@@ -1,9 +1,12 @@
 var user;
 var admonPerson;
+var uddi;
+var presidencia;
 var datos = [];
 var solicitudesUDDI = [];
 var foliosEnviados = [];
 var nombramientos = [];
+var actas = [];
 
 function loginInit(){
 	document.getElementById("titleIndex").innerHTML = "<p class='lead'>Inicio</p>";
@@ -16,24 +19,29 @@ function loginUser(){
 	if(name == "ChoxVictor"){
 		admonPerson = name;
 		userExit();
-	}else{
+	}else if(name == "GranadosVivian"){
+		uddi = name;
+		userExit();
+	}
+	else if(name == "SantiagoBryan"){
+		presidencia = name;
+		userExit();
+	}
+	else{
 		user = new User(name);
 		user.login();
 	}
 }
 function loginPassword(){
 	var password = document.getElementById("password").value;
-	if (admonPerson == "ChoxVictor") {
-		if (password == "123456789") 
-			window.location = "AdministracionPersonal.html";
-		else{
-			document.getElementById("resultError").innerHTML = "";
-			document.getElementById("resultError").innerHTML = "<div class='alert alert-danger'><button type='button' class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Error!</strong> Usuario Invalido ...</div>";
-		}
-
-	}else{
+	if (admonPerson == "ChoxVictor" && password == "123456789")
+		window.location = "AdministracionPersonal.html";
+	else if(uddi == "GranadosVivian" && password == "12345678910")
+		window.location = "DotacionDesarrolloIntegral.html";
+	else if(presidencia == "SantiagoBryan" && password == "12345")
+		window.location = "presidencia.html";
+	else
 		user.loginPassword(password);
-	}
 }
 
 function userExit(){
@@ -288,4 +296,195 @@ function transcribirNotificar(posicion){
 			}
 		},500);
 	},500);
+}
+
+function actasRecibidas(){
+	document.getElementById("titleACR").innerHTML = "<h1>Actas de Movimientos Autorizados</h1>";
+	document.getElementById("actasNombramientos").innerHTML = "";
+	document.getElementById("actasNombramientos").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("actasNombramientos").innerHTML = "<table class='table table-striped' id='actaNombramientosData'><tr class='warning'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Accion</th></tr></table>";
+		
+		actas[0] = "<tr><td>12/08/2016</td><td>Miguel Angel Menchu Xoyon</td><td>Juzgado de Familia</td><td>Oficial III</td><td>Licencia</td><td><a id='0' onclick='transcribirNotificarActas(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		actas[1] = "<tr><td>12/08/2016</td><td>Juan Vasquez</td><td>Juzgado de Instancia</td><td>Secretario</td><td>Suspencion</td><td><a id='1' onclick='transcribirNotificarActas(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		actas[2] = "<tr><td>12/08/2016</td><td>Maria del Carmen</td><td>Juzgado de Paz</td><td>Comisario</td><td>Destitucion</td><td><a id='2' onclick='transcribirNotificarActas(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		actas[3] = "<tr><td>12/08/2016</td><td>Luis Carlos Perez</td><td>Juzgado de Ejecucion</td><td>Ofial I</td><td>Traslado</td><td><a id='3' onclick='transcribirNotificarActas(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		actas[4] = "<tr><td>12/08/2016</td><td>Marco Barrientos</td><td>Juzgado Familia</td><td>Notificador</td><td>Licencia</td><td><a id='4' onclick='transcribirNotificarActas(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		actas[5] = "<tr><td>12/08/2016</td><td>Julio Melgar</td><td>Juzgado de la Niniez</td><td>Comisario</td><td>Licencia</td><td><a id='5' onclick='transcribirNotificarActas(this.id);' ><span class = 'glyphicon glyphicon-envelope'></span> Transcribir y Notificar</a></td></tr>";
+		for(var i in actas){
+			$("#actaNombramientosData").append(actas[i]);	
+		}
+	},500);
+}
+function transcribirNotificarActas(posicion){
+	prompt("Password para firma electrónica...");
+	actas.splice(posicion,1);
+	setTimeout(function(){
+		alert("Se ha notificado a la Persona Nombrada!!!");
+		document.getElementById("actasNombramientos").innerHTML = "";
+		document.getElementById("actasNombramientos").innerHTML = "<img src='img/Loading_icon.gif'>";
+		setTimeout(function(){
+			document.getElementById("actasNombramientos").innerHTML = "<table class='table table-striped' id='acuerdosNombramientosData'><tr class='warning'><th>Fecha</th><th>Dependencia</th><th>Titular</th><th>Cargo</th><th>Motivo</th><th>Accion</th></tr></table>";
+			for(var i in actas){
+				$("#acuerdosNombramientosData").append(actas[i]);	
+			}
+		},500);
+	},500);
+}
+
+
+/**
+* 		Controlador para el modulo de Dotacion y Desarrollo Integral
+*
+*/
+
+function solicitudesRecividasDictamenesListado(){
+	document.getElementById("titleSDL").innerHTML = "<h1>Dictamenes y Solicitudes Recibidas</h1>";
+	document.getElementById("SolicitudesSolicitadas").innerHTML = "";
+	document.getElementById("SolicitudesSolicitadas").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "<table class='table table-striped' id='tablaEmployesSDLC'><tr class='info'><th>Fecha</th><th>Hora</th><th>Cargo</th><th>Dependencia</th><th>Titular</th><th>Motivo</th><th>Propuesta</th><th>Observaciones</th><th>DDI</th></tr></table>";
+		datos[0] = "<tr><td>12/01/2017</td><td>13:18:09</td><td>Oficial III</td><td>Juzgado de Familia</td><td>Rodrigo Macario</td><td>Licencia Estudios</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a id='1' onclick='verListado(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Candidatos</a></td></tr>";
+		datos[1] = "<tr><td>16/01/2017</td><td>12:18:09</td><td>Comisario</td><td>Juzgado de Sentencia</td><td>Pablo Sac</td><td>Suspencion</td><td>Marcos Tax</th><td>Papeleria Completa</td><td><a id='2' onclick='verListado(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Candidatos</a></td></tr>";
+		datos[2] = "<tr><td>19/01/2017</td><td>11:18:09</td><td>Secretario</td><td>Juzgado de Femicidio</td><td>Raul Velasco</td><td>Traslado</td><td>Juan Carlos</td><td>Papeleria Completa</td><td><a id='3' onclick='verListado(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Candidatos</a></td></tr>";
+		datos[3] = "<tr><td>17/01/2017</td><td>14:18:09</td><td>Oficial II</td><td>Juzgado de Paz</th><td>Mariano Galvez</td><td>Destitucion</td><td>Pedro Barreno</td><td>Papeleria Completa</td><td><a id='4' onclick='verListado(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Candidatos</a></td></tr>";
+		datos[4] = "<tr><td>20/01/2017</td><td>16:18:09</td><td>Notificador</td><td>Juzgado de la Niñez</td><td>Saul Tale</td><td>Fallecimiento</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a id='5' onclick='verListado(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Candidatos</a></td></tr>";
+		for(var i in datos){
+			$("#tablaEmployesSDLC").append(datos[i]);	
+		}
+	},500);
+}
+
+function verListado(posicion){
+	$("#modal-id").modal();
+	document.getElementById("titleCandidatos").innerHTML = "<p class='lead'>Candidatos Elegibles</p>";
+	document.getElementById("tableCandidatos").innerHTML = "";
+	document.getElementById("tableCandidatos").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("tableCandidatos").innerHTML = "";
+		document.getElementById("tableCandidatos").innerHTML = "<table class='table table-hover' id='tablaEmployesCE'><thead><tr class='success'><th>Nombre</th><th>Cargo Actual</th><th>Regimen</th><th>Familia en OJ</th><th>Evaluacion Juridica</th><th>Elegibilidad</th><th> Selecccionar</th></tr></table>";
+		datosCE = [];
+		datosCE[0] = "<tr><td>Pedro Barreno</td><td>Comisario</td><td>No Denuncias</td><td>No</td><td>80 puntos</td><td>ELEGIBLE</td><td> <input type='checkbox' /></td></tr>";
+		datosCE[1] = "<tr><td>Carlos Lopez</td><td>Oficial III</td><td>No Denuncias</td><td>No</td><td>60 puntos</td><td>ELEGIBLE</td><td> <input type='checkbox' /></td></tr>";
+		datosCE[2] = "<tr><td>Agustin Rivera</td><td>Notificador</td><td>No Denuncias</td><td>Juan Velasco</td><td>95 puntos</td><td>ELEGIBLE</td><td> <input type='checkbox' /></td></tr>";
+		datosCE[3] = "<tr><td>Pedro Barreno</td><td>Comisario</td><td>No Denuncias</td><td>No</td><td>80 puntos</td><td>ELEGIBLE</td><td> <input type='checkbox' /></td></tr>";
+		datosCE[4] = "<tr><td>Lorenzo Lamas</td><td>Oficial I</td><td>No Denuncias</td><td>No</td><td>75 puntos</td><td>ELEGIBLE</td><td> <input type='checkbox' /></td></tr>";
+		for(var i in datosCE){
+			$("#tablaEmployesCE").append(datosCE[i]);	
+		}
+	},1000);
+}
+
+function gererarDictamen(){
+	prompt("Password para firma electronica?");
+	setTimeout(function(){
+		$("#resultDictamen").modal();
+	},500);
+}
+
+
+function solicitudesEnviadasDictamenesListado(){
+	document.getElementById("titleDLR").innerHTML = "<h1>Dictamenes y Solicitudes Realizadas y Enviados</h1>";
+	document.getElementById("dictamenesEnviados").innerHTML = "";
+	document.getElementById("dictamenesEnviados").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("dictamenesEnviados").innerHTML = "<table class='table table-striped' id='tablaEmployesDE'><tr class='info'><th>Fecha</th><th>Hora</th><th>Cargo</th><th>Dependencia</th><th>Titular</th><th>Motivo</th><th>Propuesta</th><th>Observaciones</th><th>Dictamenes y Listados</th></tr></table>";
+		var datosDE = [];
+		datosDE[0] = "<tr><td>12/01/2017</td><td>13:18:09</td><td>Oficial III</td><td>Juzgado de Familia</td><td>Rodrigo Macario</td><td>Licencia Estudios</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a href='img/Dictamen.png' ><span class = 'glyphicon glyphicon-list-alt'></span> Ver</a></td></tr>";
+		datosDE[1] = "<tr><td>16/01/2017</td><td>12:18:09</td><td>Comisario</td><td>Juzgado de Sentencia</td><td>Pablo Sac</td><td>Suspencion</td><td>Marcos Tax</th><td>Papeleria Completa</td><td><a href='img/lidatoCandidatos.png' ><span class = 'glyphicon glyphicon-list-alt'></span> Ver</a></td></tr>";
+		datosDE[2] = "<tr><td>19/01/2017</td><td>11:18:09</td><td>Secretario</td><td>Juzgado de Femicidio</td><td>Raul Velasco</td><td>Traslado</td><td>Juan Carlos</td><td>Papeleria Completa</td><td><a href='img/Dictamen.png' ><span class = 'glyphicon glyphicon-list-alt'></span> Ver</a></td></tr>";
+		datosDE[3] = "<tr><td>17/01/2017</td><td>14:18:09</td><td>Oficial II</td><td>Juzgado de Paz</th><td>Mariano Galvez</td><td>Destitucion</td><td>Pedro Barreno</td><td>Papeleria Completa</td><td><a href='img/Dictamen.png' ><span class = 'glyphicon glyphicon-list-alt'></span> Ver</a></td></tr>";
+		datosDE[4] = "<tr><td>20/01/2017</td><td>16:18:09</td><td>Notificador</td><td>Juzgado de la Niñez</td><td>Saul Tale</td><td>Fallecimiento</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a href='img/Dictamen.png' ><span class = 'glyphicon glyphicon-list-alt'></span> Ver</a></td></tr>";
+		for(var i in datosDE){
+			$("#tablaEmployesDE").append(datosDE[i]);	
+		}
+	},500);
+}
+
+
+
+/**
+* 		Controlador para el modulo de Presidencia de CSJ
+*
+*/
+
+function fijasAdministrativas(){
+	document.getElementById("titleSDL").innerHTML = "<h1>Folios Vacantes Fijas Administrativas </h1>";
+	document.getElementById("SolicitudesSolicitadas").innerHTML = "";
+	document.getElementById("SolicitudesSolicitadas").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("SolicitudesSolicitadas").innerHTML = "<table class='table table-striped' id='tablaEmployesSDLC'><tr class='info'><th>Fecha</th><th>Hora</th><th>Cargo</th><th>Dependencia</th><th>Titular</th><th>Motivo</th><th>Propuesta</th><th>Observaciones</th><th>Opcion</th></tr></table>";
+		datos[0] = "<tr><td>12/01/2017</td><td>13:18:09</td><td>Oficial III</td><td>Area Administrativa</td><td>Rodrigo Macario</td><td>Licencia Estudios</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a id='1' onclick='verListadoFolio(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datos[1] = "<tr><td>16/01/2017</td><td>12:18:09</td><td>Comisario</td><td>Juzgado de Sentencia</td><td>Pablo Sac</td><td>Suspencion</td><td>Marcos Tax</th><td>Papeleria Completa</td><td><a id='2' onclick='verListadoFolio(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datos[2] = "<tr><td>19/01/2017</td><td>11:18:09</td><td>Secretario</td><td>Area Administrativa</td><td>Raul Velasco</td><td>Traslado</td><td>Juan Carlos</td><td>Papeleria Completa</td><td><a id='3' onclick='verListadoFolio(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datos[3] = "<tr><td>17/01/2017</td><td>14:18:09</td><td>Oficial II</td><td>Juzgado de Paz</th><td>Mariano Galvez</td><td>Destitucion</td><td>Pedro Barreno</td><td>Papeleria Completa</td><td><a id='4' onclick='verListadoFolio(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datos[4] = "<tr><td>20/01/2017</td><td>16:18:09</td><td>Notificador</td><td>Area Administrativa</td><td>Saul Tale</td><td>Fallecimiento</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a id='5' onclick='verListadoFolio(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		for(var i in datos){
+			$("#tablaEmployesSDLC").append(datos[i]);	
+		}
+	},500);
+}
+
+function verListadoFolio(posicion){
+	$("#modal-id").modal();
+	document.getElementById("titleCandidatos").innerHTML = "<p class='lead'>Candidatos Propuestos</p>";
+	document.getElementById("tableCandidatos").innerHTML = "";
+	document.getElementById("tableCandidatos").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("tableCandidatos").innerHTML = "";
+		document.getElementById("tableCandidatos").innerHTML = "<table class='table table-hover table-striped' id='tablaEmployesCE'><thead><tr class='success'><th>Nombre</th><th>Observaciones</th><th> Selecccionar</th></tr></table>";
+		datosCE = [];
+		datosCE[0] = "<tr><td>Pedro Barreno, Gerente finanzas, Titulo de Licenciatura, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCE[1] = "<tr><td>Carlos Yax Tale, Tecnico CIT, Titulo de Licenciatura, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCE[2] = "<tr><td>Mario Cansinos, Piloto Aviador, Titulo de Licenciatura, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCE[3] = "<tr><td>Mateo de Leon, Ingeniero de Proyectos, Titulo de Ingenieria, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCE[4] = "<tr><td>Mario Alfredo, , Operador de Planta, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		for(var i in datosCE){
+			$("#tablaEmployesCE").append(datosCE[i]);	
+		}
+	},1000);
+}
+function gererarAcuerdo(){
+	prompt("Password para firma electronica?");
+	setTimeout(function(){
+		$("#resultDictamen").modal();
+	},500);
+}
+
+function interinasAdministrativas(){
+	document.getElementById("titleDLR").innerHTML = "<h1>Folios Vacantes Interinas Administrativas</h1>";
+	document.getElementById("dictamenesEnviados").innerHTML = "";
+	document.getElementById("dictamenesEnviados").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("dictamenesEnviados").innerHTML = "<table class='table table-striped' id='tablaEmployesDEI'><tr class='info'><th>Fecha</th><th>Hora</th><th>Cargo</th><th>Dependencia</th><th>Titular</th><th>Motivo</th><th>Propuesta</th><th>Observaciones</th><th>Folio</th></tr></table>";
+		var datosDEI = [];
+		datosDEI[0] = "<tr><td>12/01/2017</td><td>13:18:09</td><td>Oficial III</td><td>Area Administrativa</td><td>Rodrigo Macario</td><td>Licencia Estudios</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a id='1' onclick='verListadoFolioI(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datosDEI[1] = "<tr><td>16/01/2017</td><td>12:18:09</td><td>Comisario</td><td>Juzgado de Sentencia</td><td>Pablo Sac</td><td>Suspencion</td><td>Marcos Tax</th><td>Papeleria Completa</td><td><a id='2' onclick='verListadoFolioI(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datosDEI[2] = "<tr><td>19/01/2017</td><td>11:18:09</td><td>Secretario</td><td>Area Administrativa</td><td>Raul Velasco</td><td>Traslado</td><td>Juan Carlos</td><td>Papeleria Completa</td><td><a id='3' onclick='verListadoFolioI(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datosDEI[3] = "<tr><td>17/01/2017</td><td>14:18:09</td><td>Oficial II</td><td>Juzgado de Paz</th><td>Mariano Galvez</td><td>Destitucion</td><td>Pedro Barreno</td><td>Papeleria Completa</td><td><a id='4' onclick='verListadoFolioI(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		datosDEI[4] = "<tr><td>20/01/2017</td><td>16:18:09</td><td>Notificador</td><td>Area Administrativa</td><td>Saul Tale</td><td>Fallecimiento</td><td>Dionicio Lopez</td><td>Papeleria Completa</td><td><a id='5' onclick='verListadoFolioI(this.id);' ><span class = 'glyphicon glyphicon-user'></span> Ver Folio</a></td></tr>";
+		for(var i in datosDEI){
+			$("#tablaEmployesDEI").append(datosDEI[i]);	
+		}
+	},500);
+}
+
+function verListadoFolioI(posicion){
+	$("#modal-idd").modal();
+	document.getElementById("titleCandidatosI").innerHTML = "<p class='lead'>Candidatos Propuestos</p>";
+	document.getElementById("tableCandidatosI").innerHTML = "";
+	document.getElementById("tableCandidatosI").innerHTML = "<img src='img/Loading_icon.gif'>";
+	setTimeout(function(){
+		document.getElementById("tableCandidatosI").innerHTML = "";
+		document.getElementById("tableCandidatosI").innerHTML = "<table class='table table-hover table-striped' id='tablaEmployesCEI'><thead><tr class='success'><th>Nombre</th><th>Observaciones</th><th> Selecccionar</th></tr></table>";
+		datosCEI = [];
+		datosCEI[0] = "<tr><td>Pedro Barreno, Gerente finanzas, Titulo de Licenciatura, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCEI[1] = "<tr><td>Carlos Yax Tale, Tecnico CIT, Titulo de Licenciatura, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' / checked='checked'></td></tr>";
+		datosCEI[2] = "<tr><td>Mario Cansinos, Piloto Aviador, Titulo de Licenciatura, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCEI[3] = "<tr><td>Mateo de Leon, Ingeniero de Proyectos, Titulo de Ingenieria, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		datosCEI[4] = "<tr><td>Mario Alfredo, , Operador de Planta, Ingreso a OJ el 8/02/2010</td><td>No Regimen Diciplinario, No familiares en OJ, Residencia en Totonicapan, etc </td><td> <input type='radio' /></td></tr>";
+		for(var i in datosCEI){
+			$("#tablaEmployesCEI").append(datosCEI[i]);	
+		}
+	},1000);
 }
