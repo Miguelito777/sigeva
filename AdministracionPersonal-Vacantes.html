@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AdmonPersAdmitivaVacantes">
+<head>
+	<meta charset="UTF-8">
+	<title>Vacantes Administrativas</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body>
+		<header>
+			<div class="bg-primary">
+				<div class="row">
+					<div class="col-xs-2" style="text-align:center;">
+						<img src="img/OJ-blanco.png" width="50" height="50">
+					</div>
+					<div class="col-xs-9">
+						<ol class="breadcrumb">
+						  <li><a href="index.html">SIGEVA</a></li>
+						  <li class="active">Administracion Personal</li>
+						  <li class="active">Area Administrativa</li>
+						  <li class="active">Vacantes</li>
+						</ol>
+					</div>
+					<div class="col-xs-1 bg-info" style="text-align:center;">
+						<a href="#"><p class="lead"><span class="glyphicon glyphicon-inbox"></p></a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section>
+			<div class="row">
+				<div class="col-xs-2 bg-info">
+					<div style="text-align:center;">
+						<h6>Bienvenidos(as)</h6>	
+					</div>
+						<ul class="nav nav-pills nav-stacked">
+							<br>
+					    	<li class="active"><a href="#vacantes" aria-controls="vacantes" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-pencil"></span> Vacantes Solicitadas</a></li>
+					    	<li><a href="#vacantesAutorizadas" aria-controls="vacantesAutorizadas" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-pencil"></span> Vacantes Autorizadas</a></li>
+					    	<li><a href="#vacantesRechazadas" aria-controls="vacantesRechazadas" role="tab" data-toggle="tab" onclick="newVacante()"> <span class="glyphicon glyphicon-pencil"></span>Vacantes Rechazadas</a></li>
+						</ul>
+						<br><br><br><br><br><br><br>
+				</div>
+				<div class="col-xs-10 well">
+					<div class="row">
+						<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+						    <div class="tab-content">
+						        <div role="tabpanel" class="tab-pane active" id="vacantes" ng-controller="vacantesFijas">
+						            <div id="titleVS" style="text-align:center;"></div>
+						            <div style="text-align:center;">
+						            	    <ul class="nav nav-tabs" role="tablist" id="myTab">
+										        <li role="presentation" class="active"><a href="#fijasAdministrativas" aria-controls="fijasAdministrativas" role="tab" data-toggle="tab" ng-click="showAdministrativasFijas()">Fijas</a></li>
+										        <li role="presentation"><a href="#interinasAdministrativas" aria-controls="interinasAdministrativas" role="tab" data-toggle="tab" onclick="showCourses()">Interinas</a></li>
+										    </ul>
+										    <div class="tab-content">
+										        <div role="tabpanel" class="tab-pane active" id="fijasAdministrativas">
+										            <div class="row">
+										                <div class="col-xs-12">
+										                	 <br>
+										                	 <div id="loading" style="text-align:center;"></div>
+										                	 <div style="text-align:center;">
+										                	 	<h1>Solicitudes Fijas Administrativas</h1>
+										                	 </div>
+										                	 <br>
+										                	 <div>
+										                	 	<table class="table table-hover table-striped">
+										                	 		<tr class="info">
+										                	 			<th>Dependencia</th>
+										                	 			<th>Titular</th>
+										                	 			<th>Cargo</th>
+										                	 			<th>Motivo</th>
+										                	 			<th>Propuesta</th>
+										                	 			<th>Documentos</th>
+										                	 			<th>Autorizar</th>
+										                	 			<th>Rechazar</th>
+										                	 		</tr>
+										                	 		<tr ng-repeat="solicitud in solicitudesFijas">
+										                	 			<td>{{solicitud.dependencia}}</td>
+										                	 			<td>{{solicitud.titular}}</td>
+										                	 			<td>{{solicitud.cargo}}</td>
+										                	 			<td>{{solicitud.motivo}}</td>
+										                	 			<td>{{solicitud.propuesta}}</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-primary" ng-click="showDocumentFijaAdministrativa(solicitud.codigo)">ver documento</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-success" ng-click="autorizarSolicitud(solicitud.codigo)">Autorizar</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-danger" ng-click="rechazarSolicitud(solicitud.codigo)">Rechazar</button>
+										                	 			</td>
+										                	 		</tr>
+										                	 	</table>
+										                	 </div>
+										                </div>
+										            </div>
+										        </div>
+										        <div role="tabpanel" class="tab-pane" id="interinasAdministrativas">
+										            <div class="row">
+										                <div class="col-xs-2"></div>
+										                <div class="col-xs-8" id="courses">
+										                	Hola mundooooo
+										                </div>
+										                <div class="col-xs-2"></div>
+										            </div>
+										        </div>
+										    </div>
+						            </div>
+						        </div>
+						        <div role="tabpanel" class="tab-pane active" id="vacantesAutorizadas" ng-controller="vacantesFijasAutorizadas">
+						            <div id="titleVS" style="text-align:center;"></div>
+						            <div style="text-align:center;">
+						            	    <ul class="nav nav-tabs" role="tablist" id="myTab">
+										        <li role="presentation" class="active"><a href="#fijasAdministrativasAutorizadas" aria-controls="fijasAdministrativasAutorizadas" role="tab" data-toggle="tab" ng-click="showAdministrativasFijas()">Fijassssss</a></li>
+										        <li role="presentation"><a href="#interinasAdministrativas" aria-controls="interinasAdministrativas" role="tab" data-toggle="tab" onclick="showCourses()">Interinassssss</a></li>
+										    </ul>
+										    <div class="tab-content">
+										        <div role="tabpanel" class="tab-pane" id="fijasAdministrativasAutorizadas">
+										            <div class="row">
+										                <div class="col-xs-12">
+										                	 <br>
+										                	 <div id="loading" style="text-align:center;"></div>
+										                	 <div style="text-align:center;">
+										                	 	<h1>Solicitudes Fijas Administrativas Autorizadas</h1>
+										                	 </div>
+										                	 <br>
+										                	 <div>
+										                	 	<table class="table table-hover table-striped">
+										                	 		<tr class="info">
+										                	 			<th>Dependencia</th>
+										                	 			<th>Titular</th>
+										                	 			<th>Cargo</th>
+										                	 			<th>Motivo</th>
+										                	 			<th>Propuesta</th>
+										                	 			<th>Documentos</th>
+										                	 			<th>Autorizar</th>
+										                	 			<th>Rechazar</th>
+										                	 		</tr>
+										                	 		<tr ng-repeat="solicitud in solicitudesFijas">
+										                	 			<td>{{solicitud.dependencia}}</td>
+										                	 			<td>{{solicitud.titular}}</td>
+										                	 			<td>{{solicitud.cargo}}</td>
+										                	 			<td>{{solicitud.motivo}}</td>
+										                	 			<td>{{solicitud.propuesta}}</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-primary" ng-click="showDocumentFijaAdministrativa(solicitud.codigo)">ver documento</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-success" ng-click="autorizarSolicitud(solicitud.codigo)">Autorizar</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-danger" ng-click="rechazarSolicitud(solicitud.codigo)">Rechazar</button>
+										                	 			</td>
+										                	 		</tr>
+										                	 	</table>
+										                	 </div>
+										                </div>
+										            </div>
+										        </div>
+										        <div role="tabpanel" class="tab-pane" id="interinasAdministrativas">
+										            <div class="row">
+										                <div class="col-xs-2"></div>
+										                <div class="col-xs-8" id="courses">
+										                	Hola mundooooo
+										                </div>
+										                <div class="col-xs-2"></div>
+										            </div>
+										        </div>
+										    </div>
+						            </div>
+						        </div>
+						    </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div class="row">
+				<div class="col-xs-2"></div>
+				<div class="col-xs-10">
+					<h5>Organismo Judicial, CIT, Quetzaltenango, Guatemala </h5>
+				</div>
+			</div>
+		</footer>
+		<div class="modal fade" id="autorizarSolicitud">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Solicitud Vacante y Propuesta</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Excelente!!!</strong>solicitud Autorizada Exitosamente ...
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type='text/javascript' src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/controladores.js"></script>
+	<script>controllerVacantes();</script>
+</body>
+</html>
+
