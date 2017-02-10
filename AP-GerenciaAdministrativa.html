@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="AdmonPersAdmitivaGerencia">
+<head>
+	<meta charset="UTF-8">
+	<title>Vacantes Administrativas</title>
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+</head>
+<body ng-controller="gerenciaAdministrativa">
+		<header>
+			<div class="bg-primary">
+				<div class="row">
+					<div class="col-xs-2" style="text-align:center;">
+						<img src="img/OJ-blanco.png" width="50" height="50">
+					</div>
+					<div class="col-xs-9">
+						<ol class="breadcrumb">
+						  <li><a href="index.html">SIGEVA</a></li>
+						  <li class="active">Administracion Personal</li>
+						  <li class="active">Area Administrativa</li>
+						  <li class="active">Gerencia Unidad</li>
+						</ol>
+					</div>
+					<div class="col-xs-1 bg-info" style="text-align:center;">
+						<a href="#"><p class="lead"><span class="glyphicon glyphicon-inbox"></p></a>
+					</div>
+				</div>
+			</div>
+		</header>
+		<section>
+			<div class="row">
+				<div class="col-xs-2 bg-info">
+					<div style="text-align:center;">
+						<h6>Bienvenidos(as)</h6>	
+					</div>
+						<ul class="nav nav-pills nav-stacked">
+							<br>
+					    	<li class="active"><a href="#folios" aria-controls="folios" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-pencil"></span> Folios Recibidos</a></li>
+					    	<li><a href="#foliosEnviadosGerenciaRRHH" aria-controls="foliosEnviadosGerenciaRRHH" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-share-alt"></span> Folios Enviados a Gerencia de RRHH</a></li>
+					    	<li><a href="#foliosrechazadosVarios" aria-controls="foliosrechazadosVarios" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-remove"></span> Folios Rechazados</a></li>
+					    	<li><a href="#nombramientosGerenciaRRHH" aria-controls="nombramientosGerenciaRRHH" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-import"></span> Acuerdos de Nombramiento Recibidos Gerencia RRHH</a></li>
+					    	<li><a href="#vacantesRechazadas" aria-controls="vacantesRechazadas" role="tab" data-toggle="tab" onclick="newVacante()"> <span class="glyphicon glyphicon-send"></span> Acuerdos de Nombramiento Enviados</a></li>
+						</ul>
+						<br><br><br><br><br><br><br>
+				</div>
+				<div class="col-xs-10 well">
+					<div class="row">
+						    <div class="tab-content">
+
+						    	<!-- Modulo de Folios Interinas o fijas-->
+						        <div role="tabpanel" class="tab-pane active" id="folios">
+						            <div style="text-align:center;">
+						            	    <ul class="nav nav-tabs" role="tablist" id="myTab">
+										        <li role="presentation" class="active"><a href="#fijasAdministrativas" aria-controls="fijasAdministrativas" role="tab" data-toggle="tab">Folios Administrativos Fijos</a></li>
+										        <li role="presentation"><a href="#interinasAdministrativas" aria-controls="interinasAdministrativas" role="tab" data-toggle="tab">Folios Administrativos Interinos</a></li>
+										    </ul>
+										    <div class="tab-content">
+										        <div role="tabpanel" class="tab-pane active" id="fijasAdministrativas">
+										            <div class="row">
+										                <div class="col-xs-12">
+										                	 <br>
+										                	 <div id="loading" style="text-align:center;"></div>
+										                	 <div style="text-align:center;">
+										                	 	<h1>Folios Fijos Administrativos</h1>
+										                	 </div>
+										                	 <br>
+										                	 <div>
+										                	 	<table class="table table-hover table-striped">
+										                	 		<tr class="info">
+										                	 			<th>Dependencia</th>
+										                	 			<th>Titular</th>
+										                	 			<th>Cargo</th>
+										                	 			<th>Motivo</th>
+										                	 			<th>Propuesta</th>
+										                	 			<th>Folio</th>
+										                	 			<th>Gerencia RRHH</th>
+										                	 			<th>Rechazar</th>
+										                	 		</tr>
+										                	 		<tr ng-repeat="Folios in administrativosFijosFolios">
+										                	 			<td>{{Folios.dependencia}}</td>
+										                	 			<td>{{Folios.titular}}</td>
+										                	 			<td>{{Folios.cargo}}</td>
+										                	 			<td>{{Folios.motivo}}</td>
+										                	 			<td>{{Folios.propuesta}}</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-primary" ng-click="verFolioFijoAdministrativo(Folios.codigo)">Ver</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-success" ng-click="VoBoFolioAdministrativoFijo(Folios.codigo)">Vo.Bo. y Enviar</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-danger" ng-click="rechazarFolioFijoAdministrativo(Folios.codigo)">X</button>
+										                	 			</td>
+										                	 		</tr>
+										                	 	</table>
+										                	 </div>
+										                </div>
+										            </div>
+										        </div>
+										        <div role="tabpanel" class="tab-pane" id="interinasAdministrativas">
+										            <div class="row">
+										                <div class="col-xs-12">
+										                	 <br>
+										                	 <div id="loading" style="text-align:center;"></div>
+										                	 <div style="text-align:center;">
+										                	 	<h1>Folios Interinos Administrativos</h1>
+										                	 </div>
+										                	 <br>
+										                	 <div>
+										                	 	<table class="table table-hover table-striped">
+										                	 		<tr class="info">
+										                	 			<th>Dependencia</th>
+										                	 			<th>Titular</th>
+										                	 			<th>Cargo</th>
+										                	 			<th>Motivo</th>
+										                	 			<th>Propuesta</th>
+										                	 			<th>tiempo</th>
+										                	 			<th>Folio</th>
+										                	 			<th>Gerencia RRHH</th>
+										                	 			<th>Rechazar</th>
+										                	 		</tr>
+										                	 		<tr ng-repeat="solicitud in administrativosInterinosFolios">
+										                	 			<td>{{solicitud.dependencia}}</td>
+										                	 			<td>{{solicitud.titular}}</td>
+										                	 			<td>{{solicitud.cargo}}</td>
+										                	 			<td>{{solicitud.motivo}}</td>
+										                	 			<td>{{solicitud.propuesta}}</td>
+										                	 			<td>{{solicitud.tiempo}}</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-primary" ng-click="folioInterinoAdministrativo(solicitud.codigo)">ver</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-success" ng-click="VoBoFolioAdministrativoInterino(solicitud.codigo)">Vo.Bo. y Enviar</button>
+										                	 			</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-danger" ng-click="rechazarFolioInterinoAdministrativo(solicitud.codigo)">X</button>
+										                	 			</td>
+										                	 		</tr>
+										                	 	</table>
+										                	 </div>
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+						            </div>
+						        </div>
+
+						        <!-- Modulo de Folios Enviados Interinas o fijas-->
+						        <div role="tabpanel" class="tab-pane" id="foliosEnviadosGerenciaRRHH">
+						            <div style="text-align:center;">
+						            	    <ul class="nav nav-tabs" role="tablist" id="myTab">
+										        <li role="presentation" class="active"><a href="#fijasAdministrativasEnviadas" aria-controls="fijasAdministrativasEnviadas" role="tab" data-toggle="tab">Folios Administrativos Fijos Enviados a Gerencia RRHH</a></li>
+										        <li role="presentation"><a href="#interinasAdministrativasEnviadas" aria-controls="interinasAdministrativasEnviadas" role="tab" data-toggle="tab">Folios Administrativos Interinos Enviados a Gerencia RRHH</a></li>
+										    </ul>
+										    <div class="tab-content">
+										        <div role="tabpanel" class="tab-pane active" id="fijasAdministrativasEnviadas">
+										            <div class="row">
+										                <div class="col-xs-12">
+										                	 <br>
+										                	 <div id="loading" style="text-align:center;"></div>
+										                	 <div style="text-align:center;">
+										                	 	<h1>Folios Fijos Administrativos Enviados a Gerencia RRHH</h1>
+										                	 </div>
+										                	 <br>
+										                	 <div>
+										                	 	<table class="table table-hover table-striped">
+										                	 		<tr class="info">
+										                	 			<th>Dependencia</th>
+										                	 			<th>Titular</th>
+										                	 			<th>Cargo</th>
+										                	 			<th>Motivo</th>
+										                	 			<th>Propuesta</th>
+										                	 			<th>Folio</th>
+										                	 		</tr>
+										                	 		<tr ng-repeat="Folios in administrativosFijosFoliosEnviados">
+										                	 			<td>{{Folios.dependencia}}</td>
+										                	 			<td>{{Folios.titular}}</td>
+										                	 			<td>{{Folios.cargo}}</td>
+										                	 			<td>{{Folios.motivo}}</td>
+										                	 			<td>{{Folios.propuesta}}</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-primary" ng-click="verFolioFijoAdministrativo(Folios.codigo)">Ver</button>
+										                	 			</td>
+
+										                	 		</tr>
+										                	 	</table>
+										                	 </div>
+										                </div>
+										            </div>
+										        </div>
+										        <div role="tabpanel" class="tab-pane" id="interinasAdministrativasEnviadas">
+										            <div class="row">
+										                <div class="col-xs-12">
+										                	 <br>
+										                	 <div id="loading" style="text-align:center;"></div>
+										                	 <div style="text-align:center;">
+										                	 	<h1>Folios Interinos Administrativos Enviados a Gerencia RRHH</h1>
+										                	 </div>
+										                	 <br>
+										                	 <div>
+										                	 	<table class="table table-hover table-striped">
+										                	 		<tr class="info">
+										                	 			<th>Dependencia</th>
+										                	 			<th>Titular</th>
+										                	 			<th>Cargo</th>
+										                	 			<th>Motivo</th>
+										                	 			<th>Propuesta</th>
+										                	 			<th>tiempooooo</th>
+										                	 			<th>Folio</th>
+										                	 		</tr>
+										                	 		<tr ng-repeat="solicitud in administrativosInterinosFoliosEnviados">
+										                	 			<td>{{solicitud.dependencia}}</td>
+										                	 			<td>{{solicitud.titular}}</td>
+										                	 			<td>{{solicitud.cargo}}</td>
+										                	 			<td>{{solicitud.motivo}}</td>
+										                	 			<td>{{solicitud.propuesta}}</td>
+										                	 			<td>{{solicitud.tiempo}}</td>
+										                	 			<td>
+										                	 				<button type="button" class="btn btn-primary" ng-click="folioInterinoAdministrativo(solicitud.codigo)">ver</button>
+										                	 			</td>
+										                	 		</tr>
+										                	 	</table>
+										                	 </div>
+										                </div>
+										            </div>
+										        </div>
+										    </div>
+						            </div>
+						        </div>
+
+						        <!-- Modulo de Folios Rechazados-->
+						        <div role="tabpanel" class="tab-pane" id="foliosrechazadosVarios">
+						            <div style="text-align:center;">
+						            	<h1>Folios Rechazados</h1><br>
+						            </div>
+									<table class="table table-hover table-striped">
+										<tr class="info">
+											<th>Dependencia</th>
+											<th>Titular</th>
+											<th>Cargo</th>
+											<th>Motivo</th>
+											<th>Propuesta</th>
+											<th>Folio</th>
+										</tr>
+										<tr ng-repeat="Folios in foliosAdministrativosFijosRechazados">
+											<td>{{Folios.dependencia}}</td>
+											<td>{{Folios.titular}}</td>
+											<td>{{Folios.cargo}}</td>
+											<td>{{Folios.motivo}}</td>
+											<td>{{Folios.propuesta}}</td>
+											<td>
+												<button type="button" class="btn btn-primary" ng-click="verFolioFijoAdministrativo(Folios.codigo)">Ver</button>
+											</td>
+										</tr>
+									</table>
+						         </div>
+
+						         
+								<!-- Modulo de Vacantes Rechazadas Interinas o fijas-->
+						        <div role="tabpanel" class="tab-pane" id="nombramientosGerenciaRRHH">
+						        	<ul class="nav nav-tabs" role="tablist">
+										<li role="presentation" class="active"><a href="#nombramientosRecibidosRRHH" aria-controls="nombramientosRecibidosRRHH" role="tab" data-toggle="tab" ng-click="">Solicitudes Administrativas Rechazadas Fijas</a></li>
+										<li role="presentation"><a href="#interinasAdministrativasRechazadas" aria-controls="interinasAdministrativasRechazadas" role="tab" data-toggle="tab" >Solicitudes Administrativas Rechazadas Interinas</a></li>
+									</ul>
+									<div class="tab-content">
+										<div role="tabpanel" class="tab-pane active" id="nombramientosRecibidosRRHH">
+											<div class="row">
+										   		<div class="col-xs-12">
+										        	<br>
+										        	<div style="text-align:center;">
+										        		<h1>Nombramientos Fijos Administrativos Recibidos RRHH</h1>
+										            </div>
+										            <br>
+										            <div>
+										            	<table class="table table-hover table-striped">
+											            	<tr class="info">
+											            		<th>Fecha</th>
+											                	<th>Dependencia</th>
+											                	<th>Titular</th>
+											                	<th>Cargo</th>
+											                	<th>Motivo</th>
+											                	<th>Accion</th>
+											                </tr>
+											                <tr ng-repeat="solicitud in administrativasFijasRechazadas">
+											                	<td>{{solicitud.dependencia}}</td>
+											                	<td>{{solicitud.titular}}</td>
+											                	<td>{{solicitud.cargo}}</td>
+											                	<td>{{solicitud.motivo}}</td>
+											                	<td>{{solicitud.propuesta}}</td>
+											                	<td>
+										                	 		<button type="button" class="btn btn-primary" ng-click="showDocumentFijaAdministrativa(solicitud.codigo)">ver documento</button>
+										                	 	</td>
+										                	 </tr>
+										                </table>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+										<div role="tabpanel" class="tab-pane" id="interinasAdministrativasRechazadas">
+											<div class="row">
+										   		<div class="col-xs-12">
+										        	<br>
+										        	<div style="text-align:center;">
+										        		<h1>Solicitudes Interinas Administrativas Rechazadas</h1>
+										            </div>
+										            <br>
+										            <div>
+										            	<table class="table table-hover table-striped">
+											            	<tr class="info">
+											                	<th>Dependencia</th>
+											                	<th>Titular</th>
+											                	<th>Cargo</th>
+											                	<th>Motivo</th>
+											                	<th>Propuesta</th>
+											                	<th>Documentos</th>
+											                </tr>
+											                <tr ng-repeat="solicitud in administrativasInterinasRechazadas">
+											                	<td>{{solicitud.dependencia}}</td>
+											                	<td>{{solicitud.titular}}</td>
+											                	<td>{{solicitud.cargo}}</td>
+											                	<td>{{solicitud.motivo}}</td>
+											                	<td>{{solicitud.propuesta}}</td>
+											                	<td>
+										                	 		<button type="button" class="btn btn-primary" ng-click="showDocumentFijaAdministrativa(solicitud.codigo)">ver documento</button>
+										                	 	</td>
+										                	 </tr>
+										                </table>
+										            </div>
+										        </div>
+										    </div>
+										</div>
+									</div>
+								</div>
+						    </div>
+					</div> 
+				</div>
+			</div>
+		</section>
+		<footer>
+			<div class="row">
+				<div class="col-xs-2"></div>
+				<div class="col-xs-10">
+					<h5>Organismo Judicial, CIT, Quetzaltenango, Guatemala </h5>
+				</div>
+			</div>
+		</footer>
+		<div class="modal fade" id="foliosEnviadosGerenciaRRHHStatus">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Vo.Bo. de Folio</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-success">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Excelente!!!</strong> Folio Enviado a Gerencia RRHH correctamente ...
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="rechazarSolicitud">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Solicitud Vacante y Propuesta</h4>
+					</div>
+					<div class="modal-body">
+						<div class="alert alert-warning">
+							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+							<strong>Excelente!!!</strong> Solicitud Rechazada Exitosamente ...
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script type="text/javascript" src="js/angular.min.js"></script>
+	<script type='text/javascript' src="js/jquery-2.1.1.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="js/controladores.js"></script>
+	<script>startGerenciaAdministrativa();</script>
+</body>
+</html>
+
