@@ -30,14 +30,13 @@
 			<div class="row">
 				<div class="col-xs-2 bg-info">
 					<div style="text-align:center;">
-						<h6>Bienvenidos(as)</h6>	
+						<h6>Bienvenidos(as)</h6>
 					</div>
 						<ul class="nav nav-pills nav-stacked">
 							<br>
-					    	<li class="active"><a href="#vacantes" aria-controls="vacantes" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-pencil"></span> Vacantes Solicitadas</a></li>
+					    	<li><a href="#vacantes" aria-controls="vacantes" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-pencil"></span> Vacantes Solicitadas</a></li>
 					    	<li><a href="#foliosEngiadosRRHH" aria-controls="foliosEngiadosRRHH" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-share-alt"></span> Folios Enviados a Gerencia Unidad</a></li>
-					    	<li><a href="#acuerdosNombramientosRecibidos" aria-controls="acuerdosNombramientosRecibidos" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-check"></span> Acuerdos de Nombramiento Recibidos</a></li>
-					    	<li><a href="#acuerdosNombramientosEnviados" aria-controls="acuerdosNombramientosEnviados" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-send"></span> Acuerdos de Nombramiento Enviados</a></li>
+								<li class="active"><a href="#foliosRechazadosGerUni" aria-controls="foliosRechazadosGerUni" role="tab" data-toggle="tab"> <span class="glyphicon glyphicon-repeat"></span> Folios Rechazados de Gerencia de Unidad</a></li>
 						</ul>
 						<br><br><br><br><br><br><br>
 				</div>
@@ -45,133 +44,99 @@
 					<div class="row">
 						    <div class="tab-content">
 						    	<!-- Modulo de Vacantes Administrativas fijas-->
-						        <div role="tabpanel" class="tab-pane active" id="vacantes">
+						        <div role="tabpanel" class="tab-pane" id="vacantes">
 						            <div style="text-align:center;">
 						            	<h1>Solicitudes Administrativas Fijas</h1><br>
-										<div>
-											<table class="table table-hover table-striped">
-										    	<tr class="info">
-										        	<th>Dependencia</th>
-										        	<th>Titular</th>
-										        	<th>Cargo</th>
-										        	<th>Motivo</th>
-										        	<th>Propuesta</th>
-										        	<th>Perfil</th>
-										        	<th>Candidatos UDDI</th>
-										        </tr>
-										        <tr ng-repeat="solicitud in administrativasFijasSolicitadas">
-										        	<td>{{solicitud.dependencia}}</td>
-										          	<td>{{solicitud.titular}}</td>
-										          	<td>{{solicitud.cargo}}</td>
-										          	<td>{{solicitud.motivo}}</td>
-										          	<td>{{solicitud.propuesta}}</td>
-										          	<td>
-										           		<button type="button" class="btn btn-primary" ng-click="solicitudPerfilUcpasAdministrativaFija(solicitud.codigo)">UCPAS</button>
-										          	</td>
-										          	<td>
-										           		<button type="button" class="btn btn-success" ng-click="solicitudCandidatosUDDI(solicitud.codigo)">Ver Listado</button>
-										          	</td>
-										         </tr>
-										    </table>
-										</div>
+													<div>
+														<table class="table table-hover table-striped">
+													    	<tr class="info">
+													        	<th>Dependencia</th>
+													        	<th>Titular</th>
+													        	<th>Cargo</th>
+													        	<th>Motivo</th>
+													        	<th>Propuesta</th>
+													        	<th>Perfil</th>
+													        	<th>Candidatos UDDI</th>
+													        </tr>
+													        <tr ng-repeat="solicitud in administrativasFijasSolicitadas">
+													        	<td>{{solicitud.dependencia}}</td>
+													          	<td>{{solicitud.titular}}</td>
+													          	<td>{{solicitud.cargo}}</td>
+													          	<td>{{solicitud.motivo}}</td>
+													          	<td>{{solicitud.propuesta}}</td>
+													          	<td>
+													           		<button type="button" class="btn btn-primary" ng-click="solicitudPerfilUcpasAdministrativaFija(solicitud.codigo)">UCPAS</button>
+													          	</td>
+													          	<td>
+													           		<button type="button" class="btn btn-success" ng-click="solicitudCandidatosUDDI(solicitud.codigo)">Ver Listado</button>
+													          	</td>
+													         </tr>
+													    </table>
+													</div>
 						            </div>
 						        </div>
 
 						        <!-- Modulo de Vacantes Autorizadas Interinas o fijas-->
 						        <div role="tabpanel" class="tab-pane" id="foliosEngiadosRRHH">
 						        	<div style="text-align:center;">
-						        		<h1>Folios Administrativos Fijos Enviados</h1>	
+						        		<h1>Folios Administrativos Fijos Enviados</h1>
 						        	</div>
 						            <br>
-										<div>
-											<table class="table table-hover table-striped">
-										    	<tr class="info">
-										        	<th>Fecha Envio</th>
-										        	<th>Dependencia</th>
-										        	<th>Titular</th>
-										        	<th>cargo</th>
-										        	<th>Motivo</th>
-										        	<th>Folio</th>
-										        </tr>
-										        <tr ng-repeat="folio in administrativasFijasAutorizadas">
-										        	<td>{{folio.fechaEnvio}}</td>
-										          	<td>{{folio.dependencia}}</td>
-										          	<td>{{folio.titular}}</td>
-										          	<td>{{folio.cargo}}</td>
-										          	<td>{{folio.motivo}}</td>
-										          	<td>
-										           		<button type="button" class="btn btn-success" ng-click="foliosAdministrativosFijosEnviados(solicitud.codigo)">Ver Folio</button>
-										          	</td>
-										         </tr>
-										    </table>
-										</div>
-						            </div>
+											<div>
+												<table class="table table-hover table-striped">
+											    	<tr class="info">
+											        	<th>Fecha Envio</th>
+											        	<th>Dependencia</th>
+											        	<th>Titular</th>
+											        	<th>cargo</th>
+											        	<th>Motivo</th>
+											        	<th>Folio</th>
+											        </tr>
+											        <tr ng-repeat="folio in administrativasFijasAutorizadas">
+											        	<td>{{folio.fechaEnvio}}</td>
+											          	<td>{{folio.dependencia}}</td>
+											          	<td>{{folio.titular}}</td>
+											          	<td>{{folio.cargo}}</td>
+											          	<td>{{folio.motivo}}</td>
+											          	<td>
+											           		<button type="button" class="btn btn-success" ng-click="foliosAdministrativosFijosEnviados(solicitud.codigo)">Ver Folio</button>
+											          	</td>
+											         </tr>
+											    </table>
+											</div>
+						         </div>
 
-								<!-- Modulo de Vacantes Rechazadas Interinas o fijas-->
-						        <div role="tabpanel" class="tab-pane" id="acuerdosNombramientosRecibidos">
+								<!-- Modulo de Vacantes Rechazadas fijas-->
+						        <div role="tabpanel" class="tab-pane active" id="foliosRechazadosGerUni">
 						        	<div style="text-align:center;">
-						        		<h1>Acuerdos de Nombramientos Administrativos Fijos Recibidos</h1>	
+						        		<h1>Folios Rechazados por Gerencia de Unidad</h1>
 						        	</div>
 						            <br>
-										<div>
-											<table class="table table-hover table-striped">
-										    	<tr class="info">
-										        	<th>Fecha Recibido</th>
-										        	<th>Dependencia</th>
-										        	<th>Titular</th>
-										        	<th>cargo</th>
-										        	<th>Motivo</th>
-										        	<th>Folio</th>
-										        	<th>Nombramiento</th>
-										        	<th>Transcribir</th>
-										        </tr>
-										        <tr ng-repeat="folio in administrativasInterinasSolicitadas">
-										        	<td>{{folio.fechaRecibido}}</td>
-										          	<td>{{folio.dependencia}}</td>
-										          	<td>{{folio.titular}}</td>
-										          	<td>{{folio.cargo}}</td>
-										          	<td>{{folio.motivo}}</td>
-										          	<td>
-										           		<button type="button" class="btn btn-info" ng-click="foliosAdministrativosFijosEnviados(folio.codigo)">Ver Folio</button>
-										          	</td>
-										          	<td>
-										           		<button type="button" class="btn btn-primary" ng-click="acuerdoAdministrativosFijosEnviados(folio.codigo)">Ver Nombramiento</button>
-										          	</td>
-										          	<td>
-										           		<button type="button" class="btn btn-success" ng-click="enviarNombramientoAdministrativoFijo(folio.codigo)">Enviar</button>
-										          	</td>
-										         </tr>
-										    </table>
+											<div>
+												<table class="table table-hover table-striped">
+											    	<tr class="info">
+											        	<th>Fecha Rechazado</th>
+											        	<th>Dependencia</th>
+											        	<th>Titular</th>
+											        	<th>cargo</th>
+											        	<th>Motivo</th>
+											        	<th>Observaciones</th>
+											        	<th>Editar Folio</th>
+											       </tr>
+											       <tr ng-repeat="folio in foliosFijosRechazadosGerUnida">
+											        	<td>{{folio.fechaRecibido}}</td>
+											          <td>{{folio.dependencia}}</td>
+											          <td>{{folio.titular}}</td>
+											          <td>{{folio.cargo}}</td>
+											          <td>{{folio.motivo}}</td>
+																<td>{{folio.obs}}</td>
+											         	<td>
+											          	<button type="button" class="btn btn-primary" ng-click="reEnviarFolioGerUnidad(folio.codigo)">Editar Folio</button>
+											          </td>
+											        </tr>
+											    </table>
+											</div>
 										</div>
-								</div>
-						        <div role="tabpanel" class="tab-pane" id="acuerdosNombramientosEnviados">
-						        	<div style="text-align:center;">
-						        		<h1>Acuerdos de Nombramientos Administrativos Fijos Enviados</h1>	
-						        	</div>
-						            <br>
-										<div>
-											<table class="table table-hover table-striped">
-										    	<tr class="info">
-										        	<th>Fecha Enviado</th>
-										        	<th>Dependencia</th>
-										        	<th>Titular</th>
-										        	<th>cargo</th>
-										        	<th>Motivo</th>
-										        	<th>Nombramiento</th>
-										        </tr>
-										        <tr ng-repeat="folio in administrativasInterinasAutorizadas">
-										        	<td>{{folio.fechaRecibido}}</td>
-										          	<td>{{folio.dependencia}}</td>
-										          	<td>{{folio.titular}}</td>
-										          	<td>{{folio.cargo}}</td>
-										          	<td>{{folio.motivo}}</td>
-										          	<td>
-										           		<button type="button" class="btn btn-primary" ng-click="acuerdoAdministrativosFijosEnviados(folio.codigo)">Ver Nombramiento</button>
-										          	</td>
-										         </tr>
-										    </table>
-										</div>
-								</div>
 						    </div>
 					</div>
 				</div>
@@ -285,7 +250,7 @@
 											<input type="checkbox">
 										</td>
 									</tr>
-								</table>	
+								</table>
 							</div>
 							<div class="col-xs-6">
 								<div style="text-align:center;">
@@ -310,7 +275,7 @@
 											<input type="checkbox">
 										</td>
 									</tr>
-								</table>	
+								</table>
 							</div>
 						</div>
 					</div>
@@ -321,8 +286,7 @@
 				</div>
 			</div>
 		</div>
-		
-		<div class="modal fade" id="enviarNombramientoAdministrativoFijoStatus">
+		<div class="modal fade" id="statusReEnvioFolioGerenciaUnidad">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -332,12 +296,78 @@
 					<div class="modal-body">
 						<div class="alert alert-success">
 							<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-							<strong>Excelente!!</strong> Nombramiento enviado correctamente para su transcripción ...
+							<strong>Excelente!!</strong> Folio re-enviado exitosamente a gerencia de unidad ...
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="editarFolio">
+			<div class="modal-long">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Candidatos UDDI</h4>
+					</div>
+					<div class="modal-body">
+						<div class="row">
+							<div class="col-xs-6">
+								<div style="text-align:center;">
+									<p class="lead">Candidatos Elegibles Dotacion</p>
+								</div>
+								<table class="table table-hover table-striped">
+									<tr class="info">
+										<th>Nombre</th>
+										<th>Familia en OJ</th>
+										<th>Estudios</th>
+										<th>Examenes </th>
+										<th>Agregar a Folio</th>
+									</tr>
+									<tr ng-repeat="candidato in elegiblesDotacion">
+										<td>{{candidato.nombre}}</td>
+										<td>{{candidato.familiaOJ}}</td>
+										<td>{{candidato.estudios}}</td>
+										<td>{{candidato.examenes}}</td>
+										<td>
+											<input type="checkbox">
+										</td>
+									</tr>
+								</table>
+							</div>
+							<div class="col-xs-6">
+								<div style="text-align:center;">
+									<p class="lead">Candidatos Elegibles Desarrollo</p>
+								</div>
+								<table class="table table-hover table-striped">
+									<tr class="info">
+										<th>Nombre</th>
+										<th>Cargo Actual</th>
+										<th>Familia en OJ</th>
+										<th>Denuncias en Regimen</th>
+										<th>Evaluacion y Desempenio</th>
+										<th>Agregar a Folio</th>
+									</tr>
+									<tr ng-repeat="candidato in elegiblesDesarrollo">
+										<td>{{candidato.nombre}}</td>
+										<td>{{candidato.cargoActual}}</td>
+										<td>{{candidato.familiaOJ}}</td>
+										<td>{{candidato.denunciasRegimen}}</td>
+										<td>{{candidato.examenes}}</td>
+										<td>
+											<input type="checkbox">
+										</td>
+									</tr>
+								</table>
+							</div>
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">Cancelar</button>
+						<button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="sendFoEnvGer()">Generar Folio y re-enviar a Gerencia de Unidad</button>
 					</div>
 				</div>
 			</div>
